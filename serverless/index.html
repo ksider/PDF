@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image to PDF Arranger (Serverless)</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="ru" type="button">Ru</button>
+      <button class="lang-btn" data-lang="en" type="button">En</button>
+      <button class="lang-btn" data-lang="sr" type="button">Sr</button>
+    </div>
+    <header>
+      <div>
+        <h1 id="headerTitle">PDF из картинок с сортировкой</h1>
+        <p class="subtitle" id="headerSubtitle">Загрузите изображения, перетаскивайте в нужном порядке и сохраняйте в PDF одним кликом.</p>
+      </div>
+      <div class="controls">
+        <input class="input" id="fileNameInput" type="text" value="images.pdf" aria-label="Имя PDF" title="Имя PDF файла">
+        <label class="btn upload">
+          <span id="addImagesLabel">Добавить изображения</span>
+          <input type="file" accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple id="fileInput">
+        </label>
+        <select class="select" id="sortSelect" aria-label="Сортировка">
+          <option value="manual" data-key="sortManual">Ручной порядок</option>
+          <option value="name-asc" data-key="sortNameAsc">Имя A → Я</option>
+          <option value="name-desc" data-key="sortNameDesc">Имя Я → A</option>
+          <option value="time-asc" data-key="sortTimeAsc">Старые → новые</option>
+          <option value="time-desc" data-key="sortTimeDesc">Новые → старые</option>
+        </select>
+        <button class="btn ghost-btn" id="clearBtn" type="button">Очистить</button>
+        <button class="btn" id="exportBtn" type="button" disabled>Сохранить как PDF</button>
+      </div>
+    </header>
+
+    <div id="statusBar" class="status">Готово</div>
+
+    <div id="listArea">
+      <div class="empty" id="emptyState">
+        Перетащите файлы или нажмите «Добавить изображения».
+      </div>
+      <div class="grid" id="imageGrid" hidden></div>
+      <p class="hint" id="hintText">Поддерживается drag-n-drop: захватите карточку и переместите её.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
